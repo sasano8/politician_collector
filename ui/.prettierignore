@@ -3,3 +3,5 @@ node_modules/
 vendor
 .nuxt
 *.md
+*package-lock.*
+yarn.lock
