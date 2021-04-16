@@ -1,0 +1,16 @@
+version: "3"
+services:
+  python:
+    depends_on:
+      - rabbitmq
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app:rw
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672 # queue port
+      - 15672:15672 #rabbitmq management console guest:guest
