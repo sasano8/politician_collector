@@ -6,11 +6,12 @@
       "name": "Python: docker debug",
       "type": "python",
       "request": "launch",
-      "module": "asy",
+      "module": "uvicorn",
       "args": [
         "--reload",
-        "dev:consume",
-        "dev:enqueu_job_every_seconds",
+        "--port",
+        "8080",
+        "politician_collector:app"
       ],
       "justMyCode": false
     }

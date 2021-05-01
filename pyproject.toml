@@ -12,6 +12,19 @@ python = "^3.8"
 fastapi = "^0.63.0"
 asy_rabbitmq = {git = "https://github.com/sasano8/asy_rabbitmq", rev = "main"}
 uvicorn = "^0.13.4"
+httpx = "^0.17.1"
+beautifulsoup4 = "^4.9.3"
+lxml = "^4.6.3"
+elasticsearch = {extras = ["async"], version = "^7.12.0"}
+pydantic = {extras = ["dotenv"], version = "^1.8.1"}
+elasticsearch_dsl = "^7.3.0"
+firebase_admin = "^4.5.3"
+google-cloud-storage = "^1.37.1"
+pandas = "^1.2.4"
+xlrd = "^2.0.1"
+google-cloud-firestore = "^2.1.0"
+ja_text_cleaner = "^0.0.1"
+sudachidict_core = "^20201223.post1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
