@@ -25,3 +25,14 @@ def build_for_name_search(
             },
         },
     )
+
+
+def get_profile(*, index: str, id: str):
+    return dict(
+        index=index,
+        body={
+            "fields": [],
+            "_source": True,
+            "query": {"term": {"profile.id": id}},
+        },
+    )

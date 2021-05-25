@@ -13,7 +13,6 @@ from elasticsearch.helpers import async_streaming_bulk
 import json
 from ..storage import datalake
 
-# from ..cleaner import normalize_ja
 from ja_text_cleaner.name import Wakachi
 
 logger = logging.getLogger(__name__)
@@ -21,6 +20,13 @@ logger = logging.getLogger(__name__)
 
 storage = datalake.foler("質問主意書")
 storage.mkdir()
+
+
+def dispatch(callback):
+    pass
+
+
+dispatch(lambda file_name, data: storage.write(file_name, json.dumps(data)))
 
 
 @queue_extract.task
@@ -45,24 +51,32 @@ async def get_all_content_govement_question():
 
         result = {"no": int(no), "url": page_url, "content": page_content.text}
 
-        with open(f"datalake/質問主意書/{no}", mode="w") as f:
-            data = json.dumps(result)
-            f.write(data)
+        # with open(f"datalake/質問主意書/{no}", mode="w") as f:
+        #     data = json.dumps(result)
+        #     f.write(data)
+        data = json.dumps(result)
+        storage.write(f"{no}", data)
 
-        get_content_govement_question.delay(**result)
+        # parse_page.delay(**result)
 
 
-async def stream_content():
+async def get_data():
     for content in storage:
-        dic = json.loads(content)
         await asyncio.sleep(0)
-        await get_content_govement_question.do(**dic)
+        dic = json.loads(content)
+        result = parse_page(**dic)
+        yield {"質問主意書": result}
 
 
-@queue_transform.task
-async def get_content_govement_question(
-    es: es.AsyncElasticsearch = Depends(es.get_instance),
-    loader=Depends(es.AsyncBulkInsert("共通スキーマ")),
+async def stream_content(loader=Depends(es.AsyncBulkInsert("共通スキーマ"))):
+    async for ok, result in loader(actions=get_data):
+        print(result)
+
+
+# @queue_transform.task
+def parse_page(
+    # es: es.AsyncElasticsearch = Depends(es.get_instance),
+    # loader=Depends(es.AsyncBulkInsert("共通スキーマ")),
     *,
     no: int,
     url: str,
@@ -131,15 +145,13 @@ async def get_content_govement_question(
 
             logger.info(result)
 
-    # async for ok, result in async_streaming_bulk(
-    #     client=es, index="質問主意書", actions=parse(rows)
-    # ):
+    for result in parse(rows):
+        yield result
+
+    # mapper = ({"質問主意書": x} for x in parse(rows))
+
+    # async for ok, result in loader(actions=mapper):
     #     print(result)
-
-    mapper = ({"質問主意書": x} for x in parse(rows))
-
-    async for ok, result in loader(actions=mapper):
-        print(result)
 
 
 def clean_text(dic):

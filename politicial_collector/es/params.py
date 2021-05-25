@@ -84,8 +84,8 @@ class KeyValuePair(MutableMapping):
 #     return KeyValuePairBase(key=key, value=value)  # type: ignore
 charfilter_blank = KeyValuePair(
     "charfilter_blank",
-    # {"type": "mapping", "mappings": dictionaries.char_mappings_blank},
-    {"type": "mapping", "mappings": ["\u3000 => \s"]},  # TODO: 現在の定義では空文字は駄目だと怒られてしまう
+    {"type": "mapping", "mappings": dictionaries.char_mappings_blank},
+    # {"type": "mapping", "mappings": ["\u3000 => \s"]},  # TODO: 現在の定義では空文字は駄目だと怒られてしまう
 )
 
 charfilter_異体字 = KeyValuePair(

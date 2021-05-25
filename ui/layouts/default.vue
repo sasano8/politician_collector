@@ -59,11 +59,14 @@
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    <message></message>
   </v-app>
 </template>
 
 <script>
+import Message from "../components/Message.vue";
 export default {
+  components: { Message },
   data() {
     return {
       clipped: false,
@@ -79,6 +82,11 @@ export default {
           icon: "mdi-chart-bubble",
           title: "Inspire",
           to: "/inspire",
+        },
+        {
+          icon: "mdi-apps",
+          title: "全文検索",
+          to: "/search",
         },
       ],
       miniVariant: false,

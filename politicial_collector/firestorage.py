@@ -1,6 +1,6 @@
 from google.cloud import storage
 from google.cloud.storage.bucket import Bucket
-from politician_collector.config import FirebaseConfig
+from politicial_collector.config import FirebaseConfig
 
 config = FirebaseConfig()
 config.set_env()

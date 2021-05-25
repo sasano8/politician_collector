@@ -1,7 +1,6 @@
 <template>
   <div>
-    {{ notify }}
-    <v-snackbar v-model="lastMessage" top>
+    <v-snackbar v-bind:value="lastMessage" top timeout="3000">
       {{ lastMessage }}
       <template v-slot:action="{ attrs }">
         <v-btn v-bind="attrs"> Close </v-btn>
@@ -20,3 +19,7 @@ export default Vue.extend({
   },
 });
 </script>
+
+/*
+TODO: 複数のメッセージに対応させたい。現在は１つしか表示できず、複数のメッセージのコントロールができない。
+*/

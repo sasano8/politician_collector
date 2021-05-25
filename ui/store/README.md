@@ -1,10 +1,18 @@
 # STORE
+Vue.jsの状態管理ライブラリとしてVuexを利用します。
 
-**This directory is not required, you can delete it if you don't want to use it.**
+# Vuex
+- state: 状態そのもの
+- getter: 状態に対するさまざまな参照マッピング
+- mutations: 状態変化を定義する。コミットされることで状態が確定する。
+- actions: 状態変化の確定を定義する
 
-This directory contains your Vuex Store files.
-Vuex Store option is implemented in the Nuxt.js framework.
+# mutations
 
-Creating a file in this directory automatically activates the option in the framework.
+- ミューテーションハンドラ関数は同期的でなければならない
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/guide/vuex-store).
+# actions
+
+- ミューテーションをコミットする
+- 任意の非同期関数を含むことができる
+

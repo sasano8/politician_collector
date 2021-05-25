@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: docker debug",
+      "name": "Python: app",
       "type": "python",
       "request": "launch",
       "module": "uvicorn",
@@ -11,9 +11,17 @@
         "--reload",
         "--port",
         "8080",
-        "politician_collector:app"
+        "politicial_collector:app"
       ],
       "justMyCode": false
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/ui",
+      "cwd": "ui"
     }
   ]
 }

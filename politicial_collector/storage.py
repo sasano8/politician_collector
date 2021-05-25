@@ -25,7 +25,7 @@ class Storage:
     def foler(self, path):
         return Storage(self.path / path)
 
-    def write(self, file: str, content) -> Path:
+    def write(self, file: str, content, mode="w") -> Path:
         path = self.path / file
         with open(str(path), mode="w") as f:
             f.write(content)

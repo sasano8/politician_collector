@@ -86,6 +86,9 @@ import Logo from "~/components/Logo.vue";
 import VuetifyLogo from "~/components/VuetifyLogo.vue";
 
 export default Vue.extend({
+  layout(context) {
+    return "default";
+  },
   data() {
     return {
       text: "" as String,
@@ -100,11 +103,4 @@ export default Vue.extend({
     const res = this.$accessor.age.hoge();
   },
 });
-
-// export default {
-//   components: {
-//     Logo,
-//     VuetifyLogo
-//   }
-// }
 </script>

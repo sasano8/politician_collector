@@ -1,3 +1,4 @@
+# type: ignore
 from .. import es
 
 
@@ -24,6 +25,14 @@ schemas = {
             "person_name_kana": {**es.type.keyword, **es.fields.ja},
             "political_party": {**es.type.keyword, **es.fields.ja},
             "sex": {**es.type.keyword, **es.fields.ja},
+        }
+    },
+    "documents": {
+        "properties": {
+            "title": {**es.type.keyword, **es.fields.ja},
+            "link": {**es.type.keyword, **es.fields.url},
+            "body": {**es.type.keyword, **es.fields.ja},
+            "memo": {**es.type.keyword},
         }
     },
     "profile": {
@@ -93,6 +102,19 @@ schemas = {
 
 共通スキーマ = {
     "index": "共通スキーマ",
+    "settings": es.params.analysis_ja,
+    "mappings": {"dynamic": "strict", "properties": schemas},
+}
+
+
+political_profile ={
+    "index": "political_profile",
+    "settings": es.params.analysis_ja,
+    "mappings": {"dynamic": "strict", "properties": schemas},
+}
+
+political_document ={
+    "index": "political_document",
     "settings": es.params.analysis_ja,
     "mappings": {"dynamic": "strict", "properties": schemas},
 }
