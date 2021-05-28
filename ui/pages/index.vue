@@ -98,9 +98,5 @@ export default Vue.extend({
     Logo,
     VuetifyLogo,
   },
-  created() {
-    const age = this.$accessor.age.age;
-    const res = this.$accessor.age.hoge();
-  },
 });
 </script>

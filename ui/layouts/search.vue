@@ -31,6 +31,18 @@
       </v-btn> -->
 
       <v-toolbar-title v-text="title"> </v-toolbar-title>
+      <v-spacer />
+      <query-string v-model="query_string"></query-string>
+      <v-text-field
+        v-model="query_string"
+        width="100%"
+        flat
+        solo-inverted
+        hide-details
+        label="検索キーワード"
+      ></v-text-field>
+
+      <v-spacer />
 
       <!-- <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
