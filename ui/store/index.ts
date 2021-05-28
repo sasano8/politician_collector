@@ -2,6 +2,7 @@ import { getAccessorType } from "typed-vuex";
 
 // 例えば、store/age.ts のようなサブモジュールが存在する場合、
 // ここで import しておきます。
+import * as globals from "~/store/globals";
 import * as notify from "~/store/notify";
 
 // ここでは、state, getters, mutations, actions の記法は省略しています。
@@ -30,6 +31,7 @@ export const accessorType = getAccessorType({
   actions,
   modules: {
     // import したサブモジュールはここに記述します。
+    globals,
     notify,
   },
 });

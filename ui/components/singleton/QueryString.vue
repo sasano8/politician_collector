@@ -5,7 +5,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    key: {
+    name: {
       type: String,
       default: "q",
     },
@@ -17,7 +17,7 @@ export default Vue.extend({
     $route: {
       immediate: true,
       handler(newValue, oldValue) {
-        this.updateQuery(newValue.query[this.key], this.empty);
+        this.updateQuery(newValue.query[this.name], this.empty);
       },
     },
     value: {
@@ -35,7 +35,7 @@ export default Vue.extend({
       }
 
       let query = Object.assign({}, this.$route.query);
-      query[this.key] = newValue2;
+      query[this.name] = newValue2;
       this.computedValue = newValue2;
 
       // 同じパスに移動した時、NavigationDuplicatedが発生する

@@ -6,6 +6,7 @@
       item-key="_id"
       class="elevation-1"
       :loading="loading"
+      loading-text="検索中"
     >
       <template v-slot:[`item.profile.議員氏名`]="{ item }">
         <NuxtLink
@@ -21,10 +22,11 @@
 export default {
   props: {
     queryString: { type: String, default: null },
-    loading: { type: Boolean, default: false },
   },
   data() {
     return {
+      loading: true,
+      queue: [],
       rows: [],
       headers: [
         {
@@ -73,19 +75,59 @@ export default {
         let q = queryString;
         let rows = null;
         if (q === undefined || q === null || q === "") {
-          q = "";
+          q = null;
         }
-
-        if (q === "") {
-          this.rows = [];
-        } else {
-          const url = "http://localhost:8080/person/search_profile";
-          const tmp = await this.$axios.$get(url, {
-            params: { 議員氏名: q, size: 5 },
-          });
-          this.rows = tmp.hits.hits;
-        }
+        this.updateTable(q);
       },
+    },
+  },
+  mounted() {
+    window.setInterval(this.updateQueue, 500);
+  },
+  methods: {
+    async updateTable(queryString) {
+      let p = null;
+      if (queryString === null) {
+        p = new Promise(function (resolve, reject) {
+          resolve([]);
+        });
+      } else {
+        const url = "http://localhost:8080/person/search_profile";
+        p = this.$axios
+          .$get(url, {
+            params: { 議員氏名: queryString, size: 5 },
+          })
+          .then((res) => res.hits.hits);
+      }
+      this.queue.push(p);
+    },
+    updateQueue() {
+      // 非同期に実行すると、応答結果が前後することがあるので、最終入力のみ処理する
+
+      // キューが処理済みの場合は何もしない
+      if (this.queue.length === 0) {
+        this.loading = false;
+        return;
+      }
+
+      // 実行するタスクは１つのみ
+      if (this.queue.length !== 1) {
+        this.loading = true;
+        const p = this.queue[this.queue.length - 1];
+        this.rows = [];
+        this.queue = [p];
+        return;
+      }
+
+      if (this.queue.length === 1) {
+        this.loading = true;
+        const p = this.queue[this.queue.length - 1];
+        this.queue = [];
+        p.then((value) => {
+          this.rows = value;
+          this.loading = false;
+        });
+      }
     },
   },
 };

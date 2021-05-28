@@ -8,6 +8,8 @@
             <div>{{ profile.id }}</div>
             <div>{{ profile.議員氏名 }}</div>
             <div>{{ profile.会派 }}</div>
+            <div>{{ profile.本名 }}</div>
+            <div>{{ profile.別名 }}</div>
             <!-- <ul>
               <li v-for="item in social" :key="item.title">
                 <a

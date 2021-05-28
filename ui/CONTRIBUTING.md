@@ -10,7 +10,7 @@ yarn install
 次のコマンドでプロジェクト全体のソースコードを自動フォーマットします。
 
 ``` shell
-"yarn run prettier --write .
+yarn run prettier --write .
 ```
 
 また、VSCODEに拡張機能`emeraldwalk.runonsave`を入れると、ファイル保存時に自動フォーマットが行われます。

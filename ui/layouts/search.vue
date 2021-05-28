@@ -79,9 +79,6 @@ export default {
   data() {
     return {
       query_string: null,
-      clipped: false,
-      drawer: false,
-      fixed: false,
       items: [
         {
           icon: "mdi-apps",
@@ -105,17 +102,31 @@ export default {
       title: "政治家検索",
     };
   },
-  // created() {
-  //   this.setListener();
-  // },
-  // methods: {
-  //   setListener() {
-  //     this.$nuxt.$on("updateQuery", this.setQuery);
-  //   },
-  //   setQuery(query) {
-  //     alert(query);
-  //     this.query = query || "";
-  //   },
-  // },
+  computed: {
+    clipped: {
+      get() {
+        return this.$accessor.globals.clipped;
+      },
+      set(val) {
+        this.$accessor.globals.setClipped(val);
+      },
+    },
+    drawer: {
+      get() {
+        return this.$accessor.globals.drawer;
+      },
+      set(val) {
+        this.$accessor.globals.setDrawer(val);
+      },
+    },
+    fixed: {
+      get() {
+        return this.$accessor.globals.fixed;
+      },
+      set(val) {
+        this.$accessor.globals.setFixed(val);
+      },
+    },
+  },
 };
 </script>

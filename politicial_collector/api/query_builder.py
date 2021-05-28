@@ -1,9 +1,15 @@
 def build_for_name_search(
-    *, index: str, size: int = 10, fields=["identity.person_name"], phrase: str
+    *,
+    index: str,
+    from_: int = 0,
+    size: int = 10,
+    fields=["identity.person_name"],
+    phrase: str
 ):
     return dict(
         index=index,
         body={
+            "from": from_,
             "size": size,
             "fields": fields,
             "_source": False,

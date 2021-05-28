@@ -15,13 +15,13 @@ poetry install
 ## コミットする前に
 コミット前にソースを自動整形してください。
 
-### pythonのフォーマット
+### Pythonのフォーマット
 
 ``` shell
 poetry run black .
 ```
 
-### javascriptのフォーマット
+### JavaScriptのフォーマット
 
 ``` shell
 cd ui
