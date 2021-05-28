@@ -11,3 +11,19 @@ poetryによる仮想環境作成に加え、Rabbitmqへ接続可能（docker-co
 ``` shell
 poetry install
 ```
+
+## コミットする前に
+コミット前にソースを自動整形してください。
+
+### pythonのフォーマット
+
+``` shell
+poetry run black .
+```
+
+### javascriptのフォーマット
+
+``` shell
+cd ui
+yarn run prettier --write .
+```
